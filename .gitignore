@@ -14,3 +14,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore RubyMine configs
+.idea/.generators
+.idea/.rakeTasks
+.idea/rseries.iml
+.idea/workspace.xml

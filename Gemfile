@@ -20,6 +20,7 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'bullet'
   gem 'better_errors'
+  gem 'rails_layout'
 end
 
 group :development, :test do
