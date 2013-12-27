@@ -25,8 +25,9 @@ class Color < ActiveRecord::Base
               }
             })
 
+  has_many :palette, through: :colors_palettes
 
-  def hsv_to_rgb
+  def hsv_to_rgb!
     h = self.hue / 360.0
     s = self.sat / 100.0
     v = self.val / 100.0
@@ -69,8 +70,8 @@ class Color < ActiveRecord::Base
     self.b = (b * 255).round
   end
 
-  def rgb_to_hex
-    self.hex = ['#', as_hex(this.r), as_hex(this.g), as_hex(this.b) ].join('')
+  def rgb_to_hex!
+    self.hex = ['#', as_hex(self.r), as_hex(self.g), as_hex(self.b) ].join('').downcase
   end
 
   private

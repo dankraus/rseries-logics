@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131226031434) do
+ActiveRecord::Schema.define(version: 20131227012738) do
 
   create_table "colors", force: true do |t|
     t.string   "hex"
@@ -21,6 +21,21 @@ ActiveRecord::Schema.define(version: 20131226031434) do
     t.integer  "hue"
     t.integer  "sat"
     t.integer  "val"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "colors_palettes", force: true do |t|
+    t.integer  "color_id"
+    t.integer  "palette_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "colors_palettes", ["color_id", "palette_id"], name: "index_colors_palettes_on_color_id_and_palette_id", using: :btree
+
+  create_table "palettes", force: true do |t|
+    t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
