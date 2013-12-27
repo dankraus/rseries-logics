@@ -16,9 +16,16 @@ describe Color do
 
   it "sets r,g,b with hsv" do
     color = Color.create(hue: 180, sat: 50, val: 50)
+    color.hsv_to_rgb!
     color.r.should == 64
     color.g.should == 128
     color.b.should == 128
+  end
+
+  it "sets hex with rgb" do
+    color = Color.create(r: 255, g: 0, b: 0)
+    color.rgb_to_hex!
+    color.hex.should == "#ff0000"
   end
 
   describe "validations" do
