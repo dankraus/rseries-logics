@@ -21,6 +21,7 @@ group :development do
   gem 'bullet'
   gem 'better_errors'
   gem 'rails_layout'
+  gem 'guard-rspec'
 end
 
 group :development, :test do
@@ -37,9 +38,6 @@ gem 'turbolinks'
 gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'font-awesome-rails'
 gem 'unicorn'
-
-
-
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
