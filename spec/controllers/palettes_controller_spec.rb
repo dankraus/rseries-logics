@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe PaletteController do
+describe PalettesController do
 
-  describe "GET 'create'" do
+  describe "POST 'create'" do
     it "returns http success" do
-      get 'create'
+      post 'create'
       response.should be_success
     end
   end
