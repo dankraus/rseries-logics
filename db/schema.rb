@@ -11,16 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131227012738) do
+ActiveRecord::Schema.define(version: 20131229161324) do
+
+  create_table "animations", force: true do |t|
+    t.integer  "author_id"
+    t.integer  "palette_id"
+    t.string   "name"
+    t.integer  "display_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "colors", force: true do |t|
-    t.string   "hex"
-    t.integer  "r"
-    t.integer  "g"
-    t.integer  "b"
-    t.integer  "hue"
-    t.integer  "sat"
-    t.integer  "val"
+    t.string   "hex",        default: "#000000"
+    t.integer  "r",          default: 0
+    t.integer  "g",          default: 0
+    t.integer  "b",          default: 0
+    t.integer  "hue",        default: 0
+    t.integer  "sat",        default: 0
+    t.integer  "val",        default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,6 +42,30 @@ ActiveRecord::Schema.define(version: 20131227012738) do
   end
 
   add_index "colors_palettes", ["color_id", "palette_id"], name: "index_colors_palettes_on_color_id_and_palette_id", using: :btree
+
+  create_table "display_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "rows"
+    t.integer  "columns"
+  end
+
+  create_table "frames", force: true do |t|
+    t.string   "animation_id"
+    t.string   "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "frames_colors", force: true do |t|
+    t.integer  "color_id"
+    t.integer  "frame_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "frames_colors", ["color_id", "frame_id"], name: "index_frames_colors_on_color_id_and_frame_id", using: :btree
 
   create_table "palettes", force: true do |t|
     t.integer  "author_id"

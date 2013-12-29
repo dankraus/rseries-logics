@@ -1,10 +1,11 @@
 class Color < ActiveRecord::Base
-  attr_accessor :hue, :sat, :val, :r, :g, :b, :hex
+  before_save :convert_from_hsv
 
   validates(:hue,
             {
               presence: true,
               numericality: {
+                only_integer: true,
                 greater_than_or_equal_to: 0,
                 less_than_or_equal_to: 360
               }
@@ -13,13 +14,16 @@ class Color < ActiveRecord::Base
             {
               presence: true,
               numericality: {
+                only_integer: true,
                 greater_than_or_equal_to: 0,
                 less_than_or_equal_to: 100
               }
             })
   validates(:r, :g, :b,
             {
+              presence: true,
               numericality: {
+                only_integer: true,
                 greater_than_or_equal_to: 0,
                 less_than_or_equal_to: 255
               }
@@ -28,10 +32,19 @@ class Color < ActiveRecord::Base
   has_many :colors_palettes
   has_many :palettes, through: :colors_palettes
 
-  def hsv_to_rgb!
-    h = @hue / 360.0
-    s = @sat / 100.0
-    v = @val / 100.0
+  def convert_from_hsv
+    rgb = hsv_to_rgb
+    self.r = rgb[:r]
+    self.g = rgb[:g]
+    self.b = rgb[:b]
+
+    self.hex = rgb_to_hex
+  end
+
+  def hsv_to_rgb
+    h = self.hue / 360.0
+    s = self.sat / 100.0
+    v = self.val / 100.0
 
     i = (h * 6).floor
     f = h * 6 - i
@@ -66,13 +79,11 @@ class Color < ActiveRecord::Base
         b = q
     end
 
-    @r = (r * 255).round
-    @g = (g * 255).round
-    @b = (b * 255).round
+    {r: (r * 255).round, g: (g * 255).round, b: (b * 255).round }
   end
 
-  def rgb_to_hex!
-    @hex = ['#', as_hex(@r), as_hex(@g), as_hex(@b) ].join('').downcase
+  def rgb_to_hex
+    ['#', as_hex(self.r), as_hex(self.g), as_hex(self.b) ].join('').downcase
   end
 
   private

@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+DisplayType.create(name: "RLD", rows: 5, columns: 26)
+DisplayType.create(name: "FLD (top)", rows: 5, columns: 8)
+DisplayType.create(name: "FLD (bottom)", rows: 5, columns: 8)
