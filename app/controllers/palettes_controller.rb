@@ -20,6 +20,7 @@ class PalettesController < ApplicationController
   end
 
   def show
+    @palette = Palette.find(params[:id])
   end
 
   private

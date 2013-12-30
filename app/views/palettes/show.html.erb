@@ -1,2 +1,4 @@
-<h1>Palette#show</h1>
-<p>Find me in app/views/palette/show.html.erb</p>
+<h1>Palette</h1>
+<h5>Created by @author.name at <%= @palette.created_at %></h5>
+
+<%= render partial: "palette", object: @palette %>
