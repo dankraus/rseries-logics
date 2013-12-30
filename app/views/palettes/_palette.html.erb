@@ -1,0 +1,5 @@
+<div class="palette">
+  <% palette.colors.each do |color| %>
+    <%= link_to("", palette, class: "swatch", style: "background-color: #{color.hex}" ) %>
+  <% end %>
+</div>

@@ -1,0 +1,6 @@
+<div class="col-md-3 recent">
+    <h4>Recent Color Palettes</h4>
+    <% @palettes.each do |palette| %>
+        <%= render partial: "palette", object: palette %>
+    <% end %>
+</div>

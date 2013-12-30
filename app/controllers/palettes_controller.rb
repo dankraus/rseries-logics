@@ -1,6 +1,14 @@
 class PalettesController < ApplicationController
   skip_filter :verify_authenticity_token, :create
 
+  def index
+    @palettes = Palette.recent
+  end
+
+  def new
+    @palettes = Palette.recent
+  end
+
   def create
     #puts palette_params
     @palette = Palette.create(palette_params)
@@ -9,9 +17,6 @@ class PalettesController < ApplicationController
       #format.html # show.html.erb
       format.json { render json: @palette, include: :colors  }
     end
-  end
-
-  def index
   end
 
   def show
