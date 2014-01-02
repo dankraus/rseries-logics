@@ -8,5 +8,7 @@
       the first color in the set will be adjusted to match the hue of the second color.
       This will happen behind the automatically behind the scenes.</p>
 
+  <%= render partial: "palettes/form", locals:{ palette: @palette } %>
+
 </div>
 <%= render partial: "recent", object: @palettes %>

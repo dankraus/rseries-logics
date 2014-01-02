@@ -1,0 +1,138 @@
+<div class="palette well" id="palette-builder">
+  <% palette.colors.each do |color| %>
+      <div class="color-builder row">
+          <div class="col-md-2">
+              <a href="javascript:;" class="color swatch"
+                 style="background-color: <%= color.hex %>;"
+                 data-hue="<%= color.hue %>"
+                 data-sat="<%= color.sat %>"
+                 data-val="<%= color.val %>"
+                 data-hex="<%= color.hex %>"
+                 data-r="<%= color.r %>"
+                 data-g="<%= color.g %>"
+                 data-b="<%= color.b %>"></a>
+          </div>
+
+          <div class="col-md-6 sliders">
+            <div class="row">
+                <b>Hue</b>
+                <input type="text" data-property="hue" class="slider"  value="<%= color.hue %>"
+                       data-slider-min="0" data-slider-max="360"
+                       data-slider-step="1"
+                       data-slider-value="<%= color.hue %>"
+                       data-slider-orientation="horizontal"
+                       data-slider-selection="before"
+                       data-slider-tooltip="show">
+
+            </div>
+            <div class="row">
+                <b>Sat</b>
+                <input type="text" data-property="sat" class="slider col-md-6" value="<%= color.sat %>"
+                       data-slider-min="0" data-slider-max="100"
+                       data-slider-step="1"
+                       data-slider-value="<%= color.sat %>"
+                       data-slider-orientation="horizontal"
+                       data-slider-selection="after"
+                       data-slider-tooltip="show">
+            </div>
+            <div class="row">
+                <b>Val</b>
+                <input type="text" data-property="val" class="slider col-md-6" value="<%= color.sat %>"
+                       data-slider-min="0" data-slider-max="100"
+                       data-slider-step="1"
+                       data-slider-value="<%= color.sat %>"
+                       data-slider-orientation="horizontal"
+                       data-slider-selection="after"
+                       data-slider-tooltip="show">
+            </div>
+          </div>
+          <div class="col-md-3 info">
+            <p>
+              <strong>HSV:</strong>
+              <span class="value" data-property="hue"><%= color.hue %></span>,
+              <span class="value" data-property="sat"><%= color.sat %></span>,
+              <span class="value" data-property="val"><%= color.val %></span>
+              <br />
+              <strong>Hex:</strong>
+              <span class="value" data-property="hex"><%= color.hex %></span>
+              <br />
+              <strong>RGB:</strong>
+              <span class="value" data-property="r"><%= color.r %></span>,
+              <span class="value" data-property="g"><%= color.g %></span>,
+              <span class="value" data-property="b"><%= color.b %></span>
+            </p>
+          </div>
+      </div>
+  <% end %>
+  <button class="btn btn-primary" id="addColorBtn">Add Color</button>
+</div>
+
+<button class="btn btn-success">Save Color Palette</button>
+
+
+<script id="new-color-builder-templ" type="text/template">
+  <div class="color-builder row">
+    <div class="col-md-2">
+      <a href="javascript:;" class="color swatch"
+         style="background-color: {{ hex }};"
+         data-hue="{{ hue }}"
+         data-sat="{{ sat }}"
+         data-val="{{ val }}"
+         data-hex="{{ hex }}"
+         data-r="{{ r }}"
+         data-g="{{ g }}"
+         data-b="{{ b }}"></a>
+    </div>
+
+    <div class="col-md-6 sliders">
+      <div class="row">
+        <b>Hue</b>
+        <input type="text" data-property="hue" class="slider"  value="{{ hue }}"
+               data-slider-min="0" data-slider-max="360"
+               data-slider-step="1"
+               data-slider-value="{{ hue }}"
+               data-slider-orientation="horizontal"
+               data-slider-selection="before"
+               data-slider-tooltip="show">
+
+      </div>
+      <div class="row">
+        <b>Sat</b>
+        <input type="text" data-property="sat" class="slider col-md-6" value="{{ sat }}"
+               data-slider-min="0" data-slider-max="100"
+               data-slider-step="1"
+               data-slider-value="{{ sat }}"
+               data-slider-orientation="horizontal"
+               data-slider-selection="after"
+               data-slider-tooltip="show">
+      </div>
+      <div class="row">
+        <b>Val</b>
+        <input type="text" data-property="val" class="slider col-md-6" value="{{ sat }}"
+               data-slider-min="0" data-slider-max="100"
+               data-slider-step="1"
+               data-slider-value="{{ sat }}"
+               data-slider-orientation="horizontal"
+               data-slider-selection="after"
+               data-slider-tooltip="show">
+      </div>
+    </div>
+    <div class="col-md-3 info">
+      <p>
+        <strong>HSV:</strong>
+        <span class="value" data-property="hue">{{ hue }}</span>,
+        <span class="value" data-property="sat">{{ sat }}</span>,
+        <span class="value" data-property="val">{{ val }}</span>
+        <br />
+        <strong>Hex:</strong>
+        <span class="value" data-property="hex">{{ hex }}</span>
+        <br />
+        <strong>RGB:</strong>
+        <span class="value" data-property="r">{{ r }}</span>,
+        <span class="value" data-property="g">{{ g }}</span>,
+        <span class="value" data-property="b">{{ b }}</span>
+      </p>
+    </div>
+  </div>
+</script>
+

@@ -86,6 +86,14 @@ class Color < ActiveRecord::Base
     ['#', as_hex(self.r), as_hex(self.g), as_hex(self.b) ].join('').downcase
   end
 
+  def randomize
+    self.hue = rand(0..360)
+    self.sat = rand(0..100)
+    self.val = rand(0..100)
+    convert_from_hsv
+    self
+  end
+
   private
     def as_hex(num)
       if num < 16

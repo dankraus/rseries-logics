@@ -7,16 +7,21 @@ class PalettesController < ApplicationController
 
   def new
     @palettes = Palette.recent
+    @palette = Palette.new
+    @palette.colors << Color.new()
+    @palette.colors << Color.new().randomize
   end
 
   def create
-    #puts palette_params
     @palette = Palette.create(palette_params)
-    #@palette = Palette.create(colors:[Color.create(hue:100, sat:50, val:50)])
     respond_to do |format|
-      #format.html # show.html.erb
+      format.html # show.html.erb
       format.json { render json: @palette, include: :colors  }
     end
+  end
+
+  def fork
+    @palette = Palette.find(params[:id])
   end
 
   def show

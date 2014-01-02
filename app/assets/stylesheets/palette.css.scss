@@ -12,9 +12,28 @@
     width: 55px;
     height: 55px;
     margin: 0 2px 0;
+    display:block;
     float: left;
     -moz-border-radius: 5px;
     border-radius: 5px;
+  }
+
+  .row{
+    margin: 0 0 10px 0;
+  }
+
+  .color-builder{
+    border-bottom: 1px solid #ccc;
+
+    .swatch{
+      float: none;
+      margin: 0 auto;
+    }
+
+    .slider{
+      width: 300px;
+      margin: 0 0 0 5px;
+    }
   }
 }
 
@@ -25,4 +44,6 @@
 
   }
 }
+
+
 
