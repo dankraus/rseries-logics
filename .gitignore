@@ -3,6 +3,8 @@
 .idea/.rakeTasks
 .idea/rseries.iml
 .idea/workspace.xml
+.idea/dataSources.xml
+.idea/
 
 *.rbc
 *.sassc
