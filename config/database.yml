@@ -30,10 +30,10 @@ test:
   socket: /tmp/mysql.sock
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: rseries_production
   pool: 5
-  username: root
+  username:
   password:
   socket: /tmp/mysql.sock
