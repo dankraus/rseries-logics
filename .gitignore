@@ -1,3 +1,9 @@
+# Ignore RubyMine configs
+.idea/.generators
+.idea/.rakeTasks
+.idea/rseries.iml
+.idea/workspace.xml
+
 *.rbc
 *.sassc
 .sass-cache
