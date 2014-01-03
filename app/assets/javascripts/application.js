@@ -13,4 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require lodash.min
 //= require_tree .
+
+_.partial = function(which, data) {
+    return _.template(
+        $('#' + which + '-partial').html(),
+        data
+    );
+};

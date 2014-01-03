@@ -30,6 +30,6 @@ class PalettesController < ApplicationController
 
   private
     def palette_params
-      params.require(:palette).permit(:author_id, :colors_attributes => [:hue, :sat, :val])
+      params.require(:palette).permit(:colors_attributes => [:hue, :sat, :val])
     end
 end

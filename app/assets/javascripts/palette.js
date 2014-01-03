@@ -2,22 +2,63 @@
 // All this logic will automatically be available in application.js.
 
 $(function(){
+    var $paletteBuilder =  $('#palette-builder');
+
+    var paletteBuilderTempl = _.template($('#palette-builder-template').html());
+    $('#palette-builder').html(paletteBuilderTempl($paletteBuilder.data('colors')));
+
     $('#addColorBtn').click(addColorBuilder);
+    $('#savePaletteBtn').click(savePalette);
 
     $('.slider').slider().on('slide', onSliderSlide);
 });
 
+var savePalette = function(){
+    var data = {
+        "palette": {
+            "colors_attributes": []
+        }
+    };
+
+    $('#palette-builder .color-builder').each(function(){
+        var color = {
+          "hue": $(this).data('hue'),
+          "sat": $(this).data('sat'),
+          "val": $(this).data('val')
+        };
+        data["palette"]["colors_attributes"].push(color);
+    });
+
+    console.log(JSON.stringify(data));
+
+    $.ajax({
+        type: 'post',
+       contentType: 'application/json',
+       url: '/palettes.json',
+       processData: false,
+       data: JSON.stringify(data),
+       success: function(){  },
+       error: function(){ },
+    });
+}
+
 var addColorBuilder = function(){
     var $palette = $('#palette-builder'),
-        $colorBuilderTemplate = $('#new-color-builder-templ'),
+        $colorBuilderTemplate = $('#color-builder-partial'),
+        $newColorBuilder = ''
+        colorBuilderTempl = _.template($colorBuilderTemplate.html()),
+        builder = {},
+        renderedColorBuilderHTML = '',
         h = Math.round(Math.random() * 360),
         s = Math.round(Math.random() * 100),
         v = Math.round(Math.random() * 100);
 
-    properties = calculateProperties(h, s, v);
+    color = calculateColorProperties(h, s, v);
 
-
-    //$palette.append(newColorBuilder);
+    compiledColorBuilder = colorBuilderTempl(color);
+    $newColorBuilder = $(compiledColorBuilder)
+    $palette.append($newColorBuilder);
+    $newColorBuilder.find('.slider').slider().on('slide', onSliderSlide);
 }
 
 var onSliderSlide = function(ev){
@@ -31,19 +72,19 @@ var onSliderSlide = function(ev){
         val = 0;
 
     //set the right color property for the current slider
-    $swatch.data(property, sliderVal);
+    $colorBuilder.data(property, sliderVal);
 
-    hue = $swatch.data('hue');
-    sat = $swatch.data('sat');
-    val = $swatch.data('val')
+    hue = $colorBuilder.data('hue');
+    sat = $colorBuilder.data('sat');
+    val = $colorBuilder.data('val')
 
     //run color conversions
-    properties = calculateProperties(hue, sat, val);
+    color = calculateColorProperties(hue, sat, val);
     //render the freshly converted properties in the swatch info display
-    renderProperties(properties, $swatch, $colorBuilder.find('.info'));
+    renderProperties(color, $swatch, $colorBuilder);
 }
 
-function calculateProperties(hue,sat,val){
+function calculateColorProperties(hue,sat,val){
     var properties = {
         "hue": hue,
         "sat": sat,
@@ -64,9 +105,10 @@ function calculateProperties(hue,sat,val){
     return properties;
 }
 
-function renderProperties(properties, $swatch, $info){
+function renderProperties(properties, $swatch, $colorBuilder){
     for(var property in properties){
-        $info.find('.value[data-property='+property+']').text(properties[property]);
+        $colorBuilder.find('.info .value[data-property='+property+']').text(properties[property]);
+        $colorBuilder.data(property, parseInt(properties[property]));
     }
 
     $swatch.css('backgroundColor', properties["hex"]);
