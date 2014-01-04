@@ -7,7 +7,7 @@ class Palette < ActiveRecord::Base
 
   default_scope includes(:colors).order('created_at ASC')
 
-  def self.recent
-    self.last(10)
+  def self.recent(limit=10)
+    self.last(limit)
   end
 end
