@@ -57,6 +57,13 @@ body.container{
   .jumbotron{
     background-color: rgba(238, 238, 238, 0.1);
   }
+
+  footer{
+    @extend .row;
+    border-top: 1px solid #1c1e22;
+    margin-top: 20px;
+    padding-top: 10px;
+  }
 }
 
 
