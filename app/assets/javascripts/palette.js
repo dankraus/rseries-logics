@@ -7,8 +7,9 @@ $(function(){
     var paletteBuilderTempl = _.template($('#palette-builder-template').html());
     $('#palette-builder').html(paletteBuilderTempl($paletteBuilder.data('colors')));
 
-    $('#addColorBtn').click(addColorBuilder);
-    $('#savePaletteBtn').click(savePalette);
+    $('#addColorBtn').on('click', addColorBuilder);
+    $('#palette-builder').on('click', '.removeBtn', removeColorBuilder);
+    $('#savePaletteBtn').on('click', savePalette);
 
     $('.slider').slider().on('slide', onSliderSlide);
 });
@@ -29,8 +30,6 @@ var savePalette = function(){
         data["palette"]["colors_attributes"].push(color);
     });
 
-    console.log(JSON.stringify(data));
-
     $.ajax({
         type: 'post',
        contentType: 'application/json',
@@ -38,7 +37,7 @@ var savePalette = function(){
        processData: false,
        data: JSON.stringify(data),
        success: function(){  },
-       error: function(){ },
+       error: function(){ alert('Uh-oh. Something broke'); }
     });
 }
 
@@ -54,11 +53,18 @@ var addColorBuilder = function(){
         v = Math.round(Math.random() * 100);
 
     color = calculateColorProperties(h, s, v);
+    color["deletable"] = true;
 
     compiledColorBuilder = colorBuilderTempl(color);
     $newColorBuilder = $(compiledColorBuilder)
     $palette.append($newColorBuilder);
     $newColorBuilder.find('.slider').slider().on('slide', onSliderSlide);
+}
+
+var removeColorBuilder = function(ev){
+    var $removeBtn = $(ev.currentTarget),
+        $colorBuilder = $removeBtn.parents('.color-builder');
+    $colorBuilder.remove();
 }
 
 var onSliderSlide = function(ev){

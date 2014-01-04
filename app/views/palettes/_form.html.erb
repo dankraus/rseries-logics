@@ -1,12 +1,12 @@
-<div class="well palette">
-  <div id="palette-builder" data-colors='<%= palette.colors.to_json.html_safe %>'>
+<div class="well palette row">
+  <div id="palette-builder" class="col-md-12" data-colors='<%= palette.colors.to_json.html_safe %>'>
     Loading colors..
   </div>
 
-  <button class="btn btn-primary" id="addColorBtn">Add New Color</button>
+  <button class="btn btn-primary" id="addColorBtn"><i class="fa fa-plus-square"></i> Add New Color</button>
 </div>
 
-<button class="btn btn-success" id="savePaletteBtn">Save Color Palette</button>
+<button class="btn btn-success" id="savePaletteBtn"><i class="fa fa-floppy-o"></i> Save Color Palette</button>
 
 
 <script>
@@ -33,38 +33,38 @@
          style="background-color: <%%= hex %>;"></a>
     </div>
 
-    <div class="col-md-6 sliders">
-      <div class="row">
-        <b>Hue</b>
-        <input type="text" data-property="hue" class="slider"  value="<%%= hue %>"
-               data-slider-min="0" data-slider-max="360"
-               data-slider-step="1"
-               data-slider-value="<%%= hue %>"
-               data-slider-orientation="horizontal"
-               data-slider-selection="before"
-               data-slider-tooltip="show">
+    <div class="col-md-5 sliders">
+        <div class="row">
+            <b>Hue</b>
+            <input type="text" data-property="hue" class="slider"  value="<%%= hue %>"
+                   data-slider-min="0" data-slider-max="360"
+                   data-slider-step="1"
+                   data-slider-value="<%%= hue %>"
+                   data-slider-orientation="horizontal"
+                   data-slider-selection="before"
+                   data-slider-tooltip="show">
+        </div>
 
-      </div>
-      <div class="row">
-        <b>Sat</b>
-        <input type="text" data-property="sat" class="slider col-md-6" value="<%%= sat %>"
-               data-slider-min="0" data-slider-max="100"
-               data-slider-step="1"
-               data-slider-value="<%%= sat %>"
-               data-slider-orientation="horizontal"
-               data-slider-selection="after"
-               data-slider-tooltip="show">
-      </div>
-      <div class="row">
-        <b>Val</b>
-        <input type="text" data-property="val" class="slider col-md-6" value="<%%= val %>"
-               data-slider-min="0" data-slider-max="100"
-               data-slider-step="1"
-               data-slider-value="<%%= val %>"
-               data-slider-orientation="horizontal"
-               data-slider-selection="after"
-               data-slider-tooltip="show">
-      </div>
+        <div class="row">
+            <b>Sat</b>
+            <input type="text" data-property="sat" class="slider col-md-6" value="<%%= sat %>"
+                   data-slider-min="0" data-slider-max="100"
+                   data-slider-step="1"
+                   data-slider-value="<%%= sat %>"
+                   data-slider-orientation="horizontal"
+                   data-slider-selection="after"
+                   data-slider-tooltip="show">
+        </div>
+        <div class="row">
+            <b>Val</b>
+            <input type="text" data-property="val" class="slider col-md-6" value="<%%= val %>"
+                   data-slider-min="0" data-slider-max="100"
+                   data-slider-step="1"
+                   data-slider-value="<%%= val %>"
+                   data-slider-orientation="horizontal"
+                   data-slider-selection="after"
+                   data-slider-tooltip="show">
+        </div>
     </div>
     <div class="col-md-3 info">
       <p>
@@ -81,6 +81,11 @@
         <span class="value" data-property="g"><%%= g %></span>,
         <span class="value" data-property="b"><%%= b %></span>
       </p>
+    </div>
+    <div class="col-md-2">
+      <%% if (typeof(deletable) != "undefined") { %>
+        <button class="btn btn-danger btn-xs removeBtn"><i class="fa fa-minus-square"></i> Remove</button>
+      <%% }  %>
     </div>
   </div>
 </script>
