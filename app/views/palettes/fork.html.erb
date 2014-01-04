@@ -1,0 +1,14 @@
+<div class="col-md-9">
+  <h1>Color Palette Builder</h1>
+  <h4>Create, edit and browse color palettes (color-sets) for use with the Logic Engine.</h4>
+  <p>Color palettes should consist of at least 2 colors. The first color in the set is typically black.
+    During the standard random sequence the colors will be cycled up and down
+    (for example the FLD pixels cycle from black to blues to whites to blues to black etc.).
+    To ensure smooth color transitions,
+    the first color in the set will be adjusted to match the hue of the second color.
+    This will happen behind the automatically behind the scenes.</p>
+
+  <%= render partial: "palettes/form", locals:{ palette: @palette } %>
+
+</div>
+<%= render partial: "recent", object: @palettes %>

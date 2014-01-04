@@ -1,7 +1,7 @@
 Rseries::Application.routes.draw do
   root "static_pages#index"
   get "static_pages/about"
-  get "palettes/:id/fork" => 'palettes#fork'
+  get "palettes/:id/fork" => 'palettes#fork', as: :fork_palette
   resources :palettes
 
   # The priority is based upon order of creation: first created -> highest priority.

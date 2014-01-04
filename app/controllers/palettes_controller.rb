@@ -22,10 +22,12 @@ class PalettesController < ApplicationController
 
   def fork
     @palette = Palette.find(params[:id])
+    @palettes = Palette.recent
   end
 
   def show
     @palette = Palette.find(params[:id])
+    @palettes = Palette.recent
   end
 
   private

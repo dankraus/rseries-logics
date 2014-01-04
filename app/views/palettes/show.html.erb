@@ -2,5 +2,4 @@
 <h5>Created by @author.name at <%= @palette.created_at %></h5>
 
 <%= render partial: "palette", object: @palette %>
-
-<a href="#" class="btn btn-primary" role="button">Fork Color Palette</a>
+<%= link_to("Fork Color Palette", fork_palette_path, class: "btn btn-primary", role: "button") %>
