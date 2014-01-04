@@ -34,12 +34,30 @@ img {
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
+  background-color: rgba(238, 238, 238, 0.1);
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
+
+  .well{
+    background-color: rgba(238, 238, 238, 0.1);
+    border-color: #212020;
+  }
+
   }
 section {
   @extend .row;
   margin-top: 20px;
   }
+
+body.container{
+  background: url(rseriesbg.png);
+  color: #c6bfc7;
+}
+
+
+
+.navbar > .container .navbar-brand{
+  background: url(navlogo.png) no-repeat 15px 7px;
+  padding-left: 60px;
+}
